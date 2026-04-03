@@ -1,3 +1,5 @@
+using System.Threading.Tasks.Dataflow;
+
 class Program
 {
     static void Main()
@@ -20,10 +22,8 @@ class Program
 
         while (userInput != 0)
         {
-            Console.Write("Write the first number: ");
-            int firstNumber = int.Parse(Console.ReadLine());
-            Console.Write("Write the second number: ");
-            int secondNumber = int.Parse(Console.ReadLine());
+            int firstNumber = ReadInt("Write the first number: ");
+            int secondNumber = ReadInt("Write the second number: ");
             Console.WriteLine();
             switch (userInput)
             {
@@ -40,7 +40,7 @@ class Program
                     Console.WriteLine($"Div: {DivOperation(firstNumber, secondNumber):f2}");
                     break;
                 default:
-                    Console.WriteLine("Wrong number");
+                    Console.WriteLine("Wrong number. Try again");
                     break;
             }
             Console.Write("\nWrite the number of operation:");
@@ -74,9 +74,20 @@ class Program
         if (secondNumber == 0)
         {
             Console.WriteLine("Cannot divide by zero");
-            return 0;
+            return double.NaN;
         }
         double div = (double)firstNumber / secondNumber;
         return div;
+    }
+
+    public static int ReadInt(string message)
+    {
+        int number;
+        Console.Write(message);
+        while (!int.TryParse(Console.ReadLine(), out number))
+        {
+            Console.Write("Invalid input. Try again: ");
+        }
+        return number;
     }
 }

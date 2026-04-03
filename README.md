@@ -1,6 +1,7 @@
 Console Calculator
 
 Simply console calculator with 4 operations:
+
   0. Exit
   1. Summation numbers
   2. Subtraction numbers
